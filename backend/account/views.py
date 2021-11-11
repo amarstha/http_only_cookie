@@ -43,7 +43,7 @@ class RegisterView(APIView):
 
 						if User.objects.filter(username=username).exists():
 							return Response(
-								{'detail': 'Account created successfully'},
+								{'success': 'Account created successfully'},
 								status=status.HTTP_201_CREATED
 							)
 						else:
