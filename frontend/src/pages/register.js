@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import Layout from '../hocs/Layout';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { register } from '../actions/auth';
 
 const RegisterPage = () => {
+
+	const dispatch = useDispatch();
+	const router = useRouter();
+	const register_success = useSelector(state => state.auth.register_success);
+	const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+	const loading = useSelector(state => state.auth.loading);
+
 	const [formData, setFormData] = useState({
 		first_name: '',
 		last_name: '',
@@ -26,7 +36,15 @@ const RegisterPage = () => {
 	const onSubmit = e => {
 		e.preventDefault();
 
+		if (dispatch && dispatch !== null && dispatch !== undefined)
+            dispatch(register(first_name, last_name, username, password, re_password));
+
 	};
+
+	// if (typeof window !== 'undefined' && isAuthenticated)
+ //        router.push('/dashboard');
+ //    if (register_success)
+ //        router.push('/login');
 
 	return(
 		<Layout
@@ -37,7 +55,7 @@ const RegisterPage = () => {
 			<form className='bg-light p-5 mt-5 mb-5' onSubmit={onSubmit}>
 				<h3>Create an Account</h3>
 				<div className='form-group'>
-					<label className='form-label mt-5' htmlFor='first_name'>
+					<label className='form-label' htmlFor='first_name'>
 						<strong>First Name*</strong>
 					</label>
 					<input 
@@ -51,7 +69,7 @@ const RegisterPage = () => {
 					/>
 				</div>
 				<div className='form-group'>
-					<label className='form-label mt-5' htmlFor='last_name'>
+					<label className='form-label' htmlFor='last_name'>
 						<strong>Last Name*</strong>
 					</label>
 					<input 
@@ -65,8 +83,8 @@ const RegisterPage = () => {
 					/>
 				</div>
 				<div className='form-group'>
-					<label className='form-label mt-5' htmlFor='username'>
-						<strong>Last Name*</strong>
+					<label className='form-label' htmlFor='username'>
+						<strong>User Name*</strong>
 					</label>
 					<input 
 						className='form-control'
@@ -79,7 +97,7 @@ const RegisterPage = () => {
 					/>
 				</div>
 				<div className='form-group'>
-					<label className='form-label mt-5' htmlFor='password'>
+					<label className='form-label' htmlFor='password'>
 						<strong>Password*</strong>
 					</label>
 					<input 
@@ -94,7 +112,7 @@ const RegisterPage = () => {
 					/>
 				</div>
 				<div className='form-group'>
-					<label className='form-label mt-5' htmlFor='re_password'>
+					<label className='form-label' htmlFor='re_password'>
 						<strong>Confirm Password*</strong>
 					</label>
 					<input 
@@ -108,7 +126,7 @@ const RegisterPage = () => {
 						required
 					/>
 				</div>
-				<button className='btn btn-primary mt-5' type='submit'>
+				<button className='btn btn-primary' type='submit'>
 					Create Account
 				</button>
 			</form>

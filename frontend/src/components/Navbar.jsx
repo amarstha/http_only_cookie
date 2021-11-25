@@ -23,10 +23,17 @@ const Navbar = () => {
 			      		</a>
 			      	</Link>
 		        </li>
-		        <li className='nav-item active'>
+		        <li className='nav-item'>
 			      	<Link href='/register'>
 			      		<a className={ router.pathname === '/register' ? 'nav-link active' : 'nav-link' }>
 			      			Register 
+			      		</a>
+			      	</Link>
+		        </li>
+		        <li className='nav-item'>
+			      	<Link href='/login'>
+			      		<a className={ router.pathname === '/login' ? 'nav-link active' : 'nav-link' }>
+			      			Login 
 			      		</a>
 			      	</Link>
 		        </li>
