@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import Layout from '../hocs/Layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { register } from '../actions/auth';
+import Layout from '../hocs/Layout';
+import Loader from 'react-loader-spinner';
 
 const RegisterPage = () => {
 
@@ -41,10 +42,10 @@ const RegisterPage = () => {
 
 	};
 
-	// if (typeof window !== 'undefined' && isAuthenticated)
- //        router.push('/dashboard');
- //    if (register_success)
- //        router.push('/login');
+	if (typeof window !== 'undefined' && isAuthenticated)
+        router.push('/dashboard');
+    if (register_success)
+        router.push('/login');
 
 	return(
 		<Layout
@@ -126,9 +127,22 @@ const RegisterPage = () => {
 						required
 					/>
 				</div>
-				<button className='btn btn-primary' type='submit'>
-					Create Account
-				</button>
+				{
+                    loading ? (
+                        <div className='d-flex justify-content-center align-items-center mt-5'>
+                            <Loader
+                                type='Oval'
+                                color='#00bfff'
+                                width={50}
+                                height={50}
+                            />
+                        </div>
+                    ) : (
+                        <button className='btn btn-primary mt-5' type='submit'>
+                            Create Account
+                        </button>
+                    )
+                }
 			</form>
 		</Layout>
 	);
